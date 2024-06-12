@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "swagger.config",
+      "type": "com.rabbiter.music.config.Knife4jConfig",
+      "sourceType": "com.rabbiter.music.config.Knife4jConfig"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

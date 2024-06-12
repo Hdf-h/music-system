@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rabbiter.music.dao.AttentionMapper">
+    <resultMap id="BaseResultMap" type="com.rabbiter.music.pojo.Attention" >
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="usered_id" jdbcType="INTEGER" property="useredId"/>
+        <result column="usered_name" jdbcType="INTEGER" property="useredName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,usered_id,usered_name,create_time
+    </sql>
+
+    <insert id="insert" parameterType="com.rabbiter.music.pojo.Attention">
+        insert into attention
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="useredId != null">
+                usered_id,
+            </if>
+            <if test="useredName != null">
+                usered_name,
+            </if>
+            create_time,
+        </trim>
+        <trim prefix=" values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="songId != null">
+                #{useredId},
+            </if>
+            <if test="useredName != null">
+                #{useredName},
+            </if>
+            now(),
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        delete from attention
+        where id=#{id}
+    </delete>
+
+    <delete id="deleteByUserIduseredId" parameterType="java.lang.Integer">
+        delete from attention
+        where user_id = #{userId} and usered_id = #{useredId}
+    </delete>
+
+    <select id="allAttention" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from attention
+    </select>
+
+    <select id="attentionOfUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from attention
+        where user_id = #{userId}
+    </select>
+
+    <select id="existUseredId" resultType="java.lang.Integer">
+        select count(*)
+        from attention
+        where user_id = #{userId} and usered_id = #{useredId}
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
